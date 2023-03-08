@@ -1,0 +1,19 @@
+<h1><%= @restaurant.name %></h1>
+<%= link_to "Back to list", restaurants_path, class: "btn btn-link" %>
+<ul>
+  <li>Address: <%= @restaurant.address %></li>
+  <li>Phone: <%= @restaurant.phone_number %></li>
+  <li>Category: <%= @restaurant.category %></li>
+</ul>
+<h2>Reviews</h2>
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :rating, collection: (0..5) %>
+  <%= f.input :content %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
+
+<% @restaurant.reviews.each do |review| %>
+  <ul>
+    <li><%= review.rating %>/5 - <%= review.content %></li>
+  </ul>
+<% end %>
